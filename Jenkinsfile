@@ -7,7 +7,6 @@ pipeline {
    registry = "sdebnath13/testing"
    registryCredential = "cb799438-4019-41b1-826d-5ce2c4f53f10"
   }
-
   stages {
     stage('Initialize'){
       steps{
@@ -34,13 +33,13 @@ post {
 void create_newjira_issue() {
     node {
       stage('JIRA') {
-        def NewJiraIssue = [fields: [project: [key: 'TES'],
+        def NewJiraIssue = [fields: [project: [key: 'JIRA'],
             summary: 'Maven Build',
             description: 'Facing some issue in building Maven Code',
             issuetype: [id: '3']]]
 
 
-    response = jiraNewIssue issue: NewJiraIssue, site: 'http://51.105.154.96:8080/'
+    response = jiraNewIssue issue: NewJiraIssue, site:'http://51.145.183.245:8080/'
 
     echo response.successful.toString()
     echo response.data.toString()
