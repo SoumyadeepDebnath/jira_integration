@@ -7,6 +7,7 @@ pipeline {
    registry = "sdebnath13/testing"
    registryCredential = "cb799438-4019-41b1-826d-5ce2c4f53f10"
   }
+
   stages {
     stage('Initialize'){
       steps{
@@ -21,10 +22,12 @@ pipeline {
     }     
     }
         
-}
-
+  }
 post {
+       always {
+            echo 'I will always say Hello again!'
      create_newjira_issue()
+       }
     }
 
 }
