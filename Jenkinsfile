@@ -7,13 +7,25 @@ pipeline {
    registry = "sdebnath13/testing"
    registryCredential = "cb799438-4019-41b1-826d-5ce2c4f53f10"
   }
-    stages {
+  stages {
     stage('Initialize'){
       steps{
         echo "We are doing some test"
         echo "PATH = ${PATH}"
         }
     }
+    stage('Checkout SCM') {
+  steps {
+    checkout([
+      $class: 'GitSCM',
+      branches: [[name: 'master']],
+      userRemoteConfigs: [[
+        url: 'https://github.com/RaghavGeek/Jira',
+        credentialsId: '',
+      ]]
+     ])
+   }
+}     
     stage('Build'){
            steps
            {
