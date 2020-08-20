@@ -22,22 +22,22 @@ pipeline {
     }
         
 }
-}
+
 post {
      create_newjira_issue()
     }
-}
 
+}
 void create_newjira_issue() {
     node {
       stage('JIRA') {
-        def NewJiraIssue = [fields: [project: [key: 'JIRA'],
+        def NewJiraIssue = [fields: [project: [key: 'TES'],
             summary: 'Maven Build',
             description: 'Facing some issue in building Maven Code',
             issuetype: [id: '3']]]
 
 
-    response = jiraNewIssue issue: NewJiraIssue, site: 'http://51.145.183.245:8080/'
+    response = jiraNewIssue issue: NewJiraIssue, site: 'http://51.105.154.96:8080/'
 
     echo response.successful.toString()
     echo response.data.toString()
