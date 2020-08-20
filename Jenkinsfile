@@ -15,7 +15,7 @@ pipeline {
       $class: 'GitSCM',
       branches: [[name: 'master']],
       userRemoteConfigs: [[
-        url: 'git@github.com:SoumyadeepDebnath/jira_integration.git',     
+        url: 'https://github.com/SoumyadeepDebnath/jira_integration.git',     
         credentialsId: '8acfc31c-d902-463d-ad29-afdc446892df',
       ]]
      ])
