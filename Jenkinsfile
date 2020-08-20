@@ -1,3 +1,4 @@
+properties([pipelineTriggers([githubPush()])])
 pipeline {
        agent any
   tools {
@@ -8,24 +9,25 @@ pipeline {
    registryCredential = "cb799438-4019-41b1-826d-5ce2c4f53f10"
   }
    stages {
+          stage('Checkout SCM') {
+  steps {
+    checkout([
+      $class: 'GitSCM',
+      branches: [[name: 'master']],
+      userRemoteConfigs: [[
+        url: 'git@github.com:RaghavGeek/Jira.git',     
+        credentialsId: '',
+      ]]
+     ])
+   }
+}     
     stage('Initialize'){
       steps{
         echo "We are doing some test"
         echo "PATH = ${PATH}"
         }
     }
-    stage('Checkout SCM') {
-  steps {
-    checkout([
-      $class: 'GitSCM',
-      branches: [[name: 'master']],
-      userRemoteConfigs: [[
-        url: 'git@github.com:SoumyadeepDebnath/jira_integration.git',     
-        credentialsId: '',
-      ]]
-     ])
-   }
-}     
+   
     stage('Build'){
            steps
            {
