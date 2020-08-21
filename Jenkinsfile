@@ -42,15 +42,13 @@ pipeline {
   }
 
   post {
-    always {
-      success 
-      {
-        create_jira_issue_failure()
-      }
-      failure
-      {
-        create_jira_issue_success()
-      }
+    success 
+    {
+      create_jira_issue_failure()
+    }
+    failure
+    {
+      create_jira_issue_success()
     }
   }
 }
