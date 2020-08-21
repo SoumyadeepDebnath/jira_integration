@@ -44,11 +44,11 @@ pipeline {
   post {
     success 
     {
-      create_jira_issue_failure()
+      create_jira_issue_success()
     }
     failure
     {
-      create_jira_issue_success()
+      create_jira_issue_failure()
     }
   }
 }
