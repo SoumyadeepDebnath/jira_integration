@@ -20,13 +20,7 @@ pipeline {
       }
     }
          
-    stage('Build'){
-      steps{
-        sh "mvn clean install"
-      }     
-    }
-         
-    stage('Checkout SCM') {
+    stage('Checkout Git SCM') {
       steps {
         checkout([
           $class: 'GitSCM',
@@ -37,7 +31,13 @@ pipeline {
           ]]
         ])
       }
-    }     
+    }
+   
+    stage('Build'){
+      steps{
+        sh "mvn clean install"
+      }     
+    }
     
   }
 
@@ -55,7 +55,7 @@ pipeline {
 
 void create_jira_issue_failure() {
   node {
-    stage('JIRA Issue - Failure') {
+    stage('JIRA Issue') {
       def NewJiraIssue = [fields: [project: [key: 'JIRA'],
                                    summary: 'Build Failed',
                                    description: 'Issue Occured in Building Maven Code',
@@ -70,7 +70,7 @@ void create_jira_issue_failure() {
 
 void create_jira_issue_success() {
   node {
-    stage('JIRA Issue - Success') {
+    stage('JIRA Issue') {
       def NewJiraIssue = [fields: [project: [key: 'JIRA'],
                                    summary: 'Build Success',
                                    description: 'Task Successfull in Building Maven Code',
